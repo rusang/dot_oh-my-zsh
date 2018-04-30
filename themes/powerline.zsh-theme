@@ -11,6 +11,9 @@
   # POWERLINE_RIGHT_B=""
 # fi
 
+# local ret_status="%(?:%{%F{green}%}➜ :%{%F{red}%}✘ %s)"
+local ret_status="%(?::%{%F{red}%} ✘ %s)"
+
 if [ "$POWERLINE_RIGHT_A" = "mixed" ]; then
   POWERLINE_RIGHT_A=%(?."$POWERLINE_DATE_FORMAT".%F{red}✘ %?)
 elif [ "$POWERLINE_RIGHT_A" = "exit-status" ]; then
@@ -151,7 +154,8 @@ fi
 # POWERLINE_PROMPT_ON_NEWLINE=true
 # POWERLINE_MULTILINE_FIRST_PROMPT_PREFIX="\n "
 # POWERLINE_MULTILINE_SECOND_PROMPT_PREFIX=">"
-PROMPT="%k%f%F{white}%K{blue} "$POWERLINE_PATH"%F{blue}"$POWERLINE_GIT_INFO_LEFT" %k"$'\ue0b0'"%f "
+# PROMPT='${ret_status}%{$fg_bold[green]%}%p %{$fg[cyan]%}%~ %{$fg_bold[blue]%}$(git_prompt_info)%{$fg_bold[blue]%} ${NEWLINE}% %{$reset_color%}'
+PROMPT="%k%f%F{white}%K{blue}""${ret_status}""%k%f%F{white}%K{blue} "$POWERLINE_PATH"%F{blue}"$POWERLINE_GIT_INFO_LEFT" %k"$'\ue0b0'"%f "
 
 if [ "$POWERLINE_NO_BLANK_LINE" = "" ]; then
     PROMPT="
